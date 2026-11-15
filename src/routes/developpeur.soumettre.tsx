@@ -56,7 +56,7 @@ function Submit() {
     const icon = f.get("icon") as File;
     const shots = (f.getAll("shots") as File[]).filter((x) => x.size).slice(0, 5);
     const url = String(f.get("link"));
-    if (!/^https?:\/\//.test(url)) return toast.error("URL invalide");
+    if (!/^https?:\/\//.test(url)) { toast.error("URL invalide"); return; }
     setBusy(true);
     try {
       const icon_url = icon?.size ? await upload(user.id, icon) : null;
