@@ -39,5 +39,5 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 export const useAuth = () => useContext(Ctx);
 
 export function displayName(user: User) {
-  return (user.user_metadata?.full_name || user.user_metadata?.name || user.email?.split("@")[0] || "Utilisateur") as string;
+  return (user.user_metadata?.["full_name"] || user.user_metadata?.["name"] || user.email?.split("@")[0] || "Utilisateur") as string;
 }

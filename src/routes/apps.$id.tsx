@@ -121,14 +121,14 @@ function Reviews({ appId }: { appId: string }) {
   });
 
   const submit = async () => {
-    if (!user || !rating) return;
+    if (!user || !rating) return undefined;
     setBusy(true);
     const { error } = await supabase.from("reviews").upsert(
       { app_id: appId, user_id: user.id, author_name: displayName(user), rating, comment: comment.trim() },
       { onConflict: "app_id,user_id" },
     );
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setComment("");
     qc.invalidateQueries({ queryKey: ["reviews", appId] });
     qc.invalidateQueries({ queryKey: ["app", appId] });
@@ -167,9 +167,9 @@ function ReportButton({ appId }: { appId: string }) {
   const [open, setOpen] = useState(false);
   const [reason, setReason] = useState("");
   const send = async () => {
-    if (!user) return;
+    if (!user) return undefined;
     const { error } = await supabase.from("reports").insert({ app_id: appId, user_id: user.id, reason: reason.trim() });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success(t("reported"));
     setReason("");
     setOpen(false);
