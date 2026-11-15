@@ -14,16 +14,214 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      apps: {
+        Row: {
+          category_slug: string
+          countries: string[]
+          created_at: string
+          description: string
+          developer_id: string | null
+          developer_name: string
+          download_url: string
+          downloads: number
+          featured: boolean
+          icon_url: string | null
+          id: string
+          is_free: boolean
+          languages: string[]
+          made_in_africa: boolean
+          name: string
+          rating_avg: number
+          rating_count: number
+          screenshots: string[]
+          short_description: string
+          size_mb: number | null
+          status: Database["public"]["Enums"]["app_status"]
+        }
+        Insert: {
+          category_slug: string
+          countries?: string[]
+          created_at?: string
+          description?: string
+          developer_id?: string | null
+          developer_name: string
+          download_url: string
+          downloads?: number
+          featured?: boolean
+          icon_url?: string | null
+          id?: string
+          is_free?: boolean
+          languages?: string[]
+          made_in_africa?: boolean
+          name: string
+          rating_avg?: number
+          rating_count?: number
+          screenshots?: string[]
+          short_description?: string
+          size_mb?: number | null
+          status?: Database["public"]["Enums"]["app_status"]
+        }
+        Update: {
+          category_slug?: string
+          countries?: string[]
+          created_at?: string
+          description?: string
+          developer_id?: string | null
+          developer_name?: string
+          download_url?: string
+          downloads?: number
+          featured?: boolean
+          icon_url?: string | null
+          id?: string
+          is_free?: boolean
+          languages?: string[]
+          made_in_africa?: boolean
+          name?: string
+          rating_avg?: number
+          rating_count?: number
+          screenshots?: string[]
+          short_description?: string
+          size_mb?: number | null
+          status?: Database["public"]["Enums"]["app_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "apps_category_slug_fkey"
+            columns: ["category_slug"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["slug"]
+          },
+        ]
+      }
+      categories: {
+        Row: {
+          icon: string
+          name_en: string
+          name_fr: string
+          slug: string
+          sort: number
+        }
+        Insert: {
+          icon: string
+          name_en: string
+          name_fr: string
+          slug: string
+          sort?: number
+        }
+        Update: {
+          icon?: string
+          name_en?: string
+          name_fr?: string
+          slug?: string
+          sort?: number
+        }
+        Relationships: []
+      }
+      reports: {
+        Row: {
+          app_id: string
+          created_at: string
+          id: string
+          reason: string
+          user_id: string
+        }
+        Insert: {
+          app_id: string
+          created_at?: string
+          id?: string
+          reason: string
+          user_id: string
+        }
+        Update: {
+          app_id?: string
+          created_at?: string
+          id?: string
+          reason?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reports_app_id_fkey"
+            columns: ["app_id"]
+            isOneToOne: false
+            referencedRelation: "apps"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      reviews: {
+        Row: {
+          app_id: string
+          author_name: string
+          comment: string
+          created_at: string
+          id: string
+          rating: number
+          user_id: string
+        }
+        Insert: {
+          app_id: string
+          author_name: string
+          comment?: string
+          created_at?: string
+          id?: string
+          rating: number
+          user_id: string
+        }
+        Update: {
+          app_id?: string
+          author_name?: string
+          comment?: string
+          created_at?: string
+          id?: string
+          rating?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_app_id_fkey"
+            columns: ["app_id"]
+            isOneToOne: false
+            referencedRelation: "apps"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
+      app_status: "pending" | "approved" | "rejected"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +348,9 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+      app_status: ["pending", "approved", "rejected"],
+    },
   },
 } as const
