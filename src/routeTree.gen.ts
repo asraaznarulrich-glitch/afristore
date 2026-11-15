@@ -10,11 +10,44 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AProposRouteImport } from './routes/a-propos'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ConditionsRouteImport } from './routes/conditions'
+import { Route as ConfidentialiteRouteImport } from './routes/confidentialite'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AppsIndexRouteImport } from './routes/apps.index'
+import { Route as AppsIdRouteImport } from './routes/apps.$id'
+import { Route as DeveloppeurIndexRouteImport } from './routes/developpeur.index'
+import { Route as DeveloppeurSoumettreRouteImport } from './routes/developpeur.soumettre'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AProposRoute = AProposRouteImport.update({
+  id: '/a-propos',
+  path: '/a-propos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConditionsRoute = ConditionsRouteImport.update({
+  id: '/conditions',
+  path: '/conditions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfidentialiteRoute = ConfidentialiteRouteImport.update({
+  id: '/confidentialite',
+  path: '/confidentialite',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppsIndexRoute = AppsIndexRouteImport.update({
@@ -22,31 +55,109 @@ const AppsIndexRoute = AppsIndexRouteImport.update({
   path: '/apps/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppsIdRoute = AppsIdRouteImport.update({
+  id: '/apps/$id',
+  path: '/apps/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeveloppeurIndexRoute = DeveloppeurIndexRouteImport.update({
+  id: '/developpeur/',
+  path: '/developpeur/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DeveloppeurSoumettreRoute = DeveloppeurSoumettreRouteImport.update({
+  id: '/developpeur/soumettre',
+  path: '/developpeur/soumettre',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/a-propos': typeof AProposRoute
+  '/auth': typeof AuthRoute
+  '/conditions': typeof ConditionsRoute
+  '/confidentialite': typeof ConfidentialiteRoute
+  '/contact': typeof ContactRoute
+  '/apps/$id': typeof AppsIdRoute
+  '/developpeur/soumettre': typeof DeveloppeurSoumettreRoute
   '/apps/': typeof AppsIndexRoute
+  '/developpeur/': typeof DeveloppeurIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/a-propos': typeof AProposRoute
+  '/auth': typeof AuthRoute
+  '/conditions': typeof ConditionsRoute
+  '/confidentialite': typeof ConfidentialiteRoute
+  '/contact': typeof ContactRoute
+  '/apps/$id': typeof AppsIdRoute
+  '/developpeur/soumettre': typeof DeveloppeurSoumettreRoute
   '/apps': typeof AppsIndexRoute
+  '/developpeur': typeof DeveloppeurIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/a-propos': typeof AProposRoute
+  '/auth': typeof AuthRoute
+  '/conditions': typeof ConditionsRoute
+  '/confidentialite': typeof ConfidentialiteRoute
+  '/contact': typeof ContactRoute
+  '/apps/$id': typeof AppsIdRoute
+  '/developpeur/soumettre': typeof DeveloppeurSoumettreRoute
   '/apps/': typeof AppsIndexRoute
+  '/developpeur/': typeof DeveloppeurIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/apps/'
+  fullPaths:
+    | '/'
+    | '/a-propos'
+    | '/auth'
+    | '/conditions'
+    | '/confidentialite'
+    | '/contact'
+    | '/apps/$id'
+    | '/developpeur/soumettre'
+    | '/apps/'
+    | '/developpeur/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/apps'
-  id: '__root__' | '/' | '/apps/'
+  to:
+    | '/'
+    | '/a-propos'
+    | '/auth'
+    | '/conditions'
+    | '/confidentialite'
+    | '/contact'
+    | '/apps/$id'
+    | '/developpeur/soumettre'
+    | '/apps'
+    | '/developpeur'
+  id:
+    | '__root__'
+    | '/'
+    | '/a-propos'
+    | '/auth'
+    | '/conditions'
+    | '/confidentialite'
+    | '/contact'
+    | '/apps/$id'
+    | '/developpeur/soumettre'
+    | '/apps/'
+    | '/developpeur/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AProposRoute: typeof AProposRoute
+  AuthRoute: typeof AuthRoute
+  ConditionsRoute: typeof ConditionsRoute
+  ConfidentialiteRoute: typeof ConfidentialiteRoute
+  ContactRoute: typeof ContactRoute
+  AppsIdRoute: typeof AppsIdRoute
+  DeveloppeurSoumettreRoute: typeof DeveloppeurSoumettreRoute
   AppsIndexRoute: typeof AppsIndexRoute
+  DeveloppeurIndexRoute: typeof DeveloppeurIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +169,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/a-propos': {
+      id: '/a-propos'
+      path: '/a-propos'
+      fullPath: '/a-propos'
+      preLoaderRoute: typeof AProposRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conditions': {
+      id: '/conditions'
+      path: '/conditions'
+      fullPath: '/conditions'
+      preLoaderRoute: typeof ConditionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/confidentialite': {
+      id: '/confidentialite'
+      path: '/confidentialite'
+      fullPath: '/confidentialite'
+      preLoaderRoute: typeof ConfidentialiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/apps/': {
       id: '/apps/'
       path: '/apps'
@@ -65,12 +211,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/apps/$id': {
+      id: '/apps/$id'
+      path: '/apps/$id'
+      fullPath: '/apps/$id'
+      preLoaderRoute: typeof AppsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/developpeur/': {
+      id: '/developpeur/'
+      path: '/developpeur'
+      fullPath: '/developpeur/'
+      preLoaderRoute: typeof DeveloppeurIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/developpeur/soumettre': {
+      id: '/developpeur/soumettre'
+      path: '/developpeur/soumettre'
+      fullPath: '/developpeur/soumettre'
+      preLoaderRoute: typeof DeveloppeurSoumettreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AProposRoute: AProposRoute,
+  AuthRoute: AuthRoute,
+  ConditionsRoute: ConditionsRoute,
+  ConfidentialiteRoute: ConfidentialiteRoute,
+  ContactRoute: ContactRoute,
+  AppsIdRoute: AppsIdRoute,
+  DeveloppeurSoumettreRoute: DeveloppeurSoumettreRoute,
   AppsIndexRoute: AppsIndexRoute,
+  DeveloppeurIndexRoute: DeveloppeurIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
